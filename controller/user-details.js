@@ -66,13 +66,13 @@ exports.loginuser = async (req, res) => {
     }
 }
 
-exports.updateUser = (req, res) => {
+exports.updateUser = async (req, res) => {
     try {
         const email = req.body.email;
-
         const token = jwt.sign({email: email}, "registrationToken")
 
-        const updateUser =  User.findOneAndUpdate({email: email}, {
+        console.log(token);
+        const updateUser =  await User.findOneAndUpdate({email: email}, {
             $set: {
                 firstname: req.body.firstname,
                 lastname: req.body.lastname,
@@ -82,10 +82,12 @@ exports.updateUser = (req, res) => {
                 address: req.body.address,
                 token: token
             }
+        }, {
+            new: true
         })
 
         res.status(200).json({
-            success: false,
+            success: true,
             message: "User updated Successfully !!",
             data: updateUser
         })

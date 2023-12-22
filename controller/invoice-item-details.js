@@ -5,7 +5,8 @@ exports.createInvoiceItem = async (req, res) => {
     try {
         const {invoiceId, invoiceNumber, quantity, type, code, description, price, taxRate} = req.body;
 
-        const invoiceIdExist = Invoice.findById({_id: invoiceId});
+        const invoiceIdExist = await Invoice.findById({_id: invoiceId});
+        
         if(invoiceIdExist && invoiceIdExist.invoiceNumber == invoiceNumber) {
             const data = {
                 invoiceId,

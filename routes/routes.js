@@ -8,8 +8,8 @@ const route = express.Router();
 
 /**** Manage User Details ****/
 route.post("/api/v0/add/user", userDetails.addUser);
-route.put("/api/v0/update/user", userDetails.updateUser);
-route.delete("/api/v0/remove/user", userDetails.removeUser);
+route.put("/api/v0/update/user", userDetails.updateUser); 
+route.delete("/api/v0/remove/user", userDetails.removeUser); 
 route.post("/api/v0/login/user", userDetails.loginuser);
 /**** Manage User Details ****/
 

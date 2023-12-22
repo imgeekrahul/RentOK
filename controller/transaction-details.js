@@ -42,10 +42,11 @@ exports.createTransaction = async (req, res) => {
 exports.getTransactionDetailsUsingUserId = async (req, res) => {
     try {
         const userId = req.params.userId;
-        const userExist = User.findById({_id: userId})
+        const userExist = await User.findById({_id: userId})
 
+        
         if(req.headers['auth-token'] === userExist.token) {
-            const transactionDetails = await transactionDetails.find({user: userId})
+            const transactionDetails = await Transaction.find({userId: userId})
             res.status(200).json({
                 success: true,
                 message: "Fetched transactional details for a user having Id: " + userExist._id,
